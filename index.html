@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PaweRball</title>
+    <style>
+      body {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background: linear-gradient(90deg,#000000,#1d1d1d);
+      }
+      img {
+        max-width: 200px;
+        border-radius: 10px;
+      }
+      .image {
+        width: fit-content;
+        border-radius: 20px;
+        background-color: #8eccff;
+        color: #0077fd;
+        padding: 20px;
+      }
+      br {
+        height: 10px;
+      }
+      #images {
+        display: flex;
+        overflow-x: auto;
+      }
+      #branding {
+        border-radius: 100px;
+        background-color: #0077fd;
+        width: fit-content;
+        display: flex;
+        padding: 0 15px 0 10px;
+      }
+      #favicon {
+        width: 90px;
+      }
+    </style>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <script>
+      const isDemo = false;
+      async function getimgs() {
+        const apiUrl =
+          "https://api.github.com/repos/ScratchFakemon/pawerball/contents/img";
+        const imageholder = document.getElementById("images");
+        const response = await fetch(apiUrl);
+        const images = await response.json();
+        let indexjson = await fetch(
+          "https://raw.githubusercontent.com/ScratchFakemon/pawerball/refs/heads/main/img/index.json"
+        );
+        const index = await indexjson.json
+          for (let i = 0; i < images.length; i++) {
+            const currImg = images[i];
+            if ((currImg.type = "file")) {
+              const imagecontainer = document.createElement("div");
+              imagecontainer.class = "image";
+              imagacontainer.addEventListener("click", () => {
+                window.location.assign(currImg._links.self);
+              });
+              const img = document.createElement("img");
+              img.src = currImg._links.self;
+              imagecontainer.appendChild(img);
+              imagecontainer.appendChild(document.createElement("br"));
+              const title = document.createElement("b");
+              title.innerHTML = index[`${currImg.name}`].name;
+              imagecontainer.appendChild(title);
+              imagecontainer.appendChild(document.createElement("br"));
+              const creator = document.createElement("p");
+              creator.innerHTML = `By <a href=${
+                index[`${currImg.name}`].creatorurl
+              }>${index[`${currImg.name}`].creator}</a>`;
+              imagecontainer.appendChild(creator);
+            }
+          }
+        
+      }
+      if (!isDemo) {
+        document.addEventListener("DOMContentLoaded", () => {
+          getimgs();
+        });
+      }
+    
+    </script>
+  </head>
+  <body>
+    <div id="branding">
+      <img src="favicon.png" id="favicon">
+      <h1>PaweRball</h1>
+    </div>
+    <div id="images">
+      <!--<div class="image">
+        <img
+          src="C:\Users\caleb\Downloads\PaweRball Comics - Top DOS.png"
+        /><br />
+        <b>Top DOS</b><br />
+        By
+        <a href="https://scratch.mit.edu/users/Scratch_Fakemon"
+          >Scratch_Fakemon</a
+        >
+      </div>-->
+    </div>
+  </body>
+</html>
